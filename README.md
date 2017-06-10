@@ -407,4 +407,37 @@ public void delete(int id) {
 
 아래 사진은 하나읽어오기 , 전부 읽어오기 , 찾기 , 수정하기 입니다
 
+
+
 ![DBimage_1.jpg](https://github.com/iNusz/SqliteORM/blob/master/DBimage_1.jpg)
+
+
+
+하나읽어오기
+
+
+
+![readOne.png](https://github.com/iNusz/SqliteORM/blob/master/readOne.png)
+
+
+
+
+전부읽어오기
+
+
+
+![readAll.png](https://github.com/iNusz/SqliteORM/blob/master/readAll.png)
+
+
+
+찾기
+
+
+![search.png](https://github.com/iNusz/SqliteORM/blob/master/search.png)
+
+
+
+수정하기
+
+
+![update.png](https://github.com/iNusz/SqliteORM/blob/master/update.png)
