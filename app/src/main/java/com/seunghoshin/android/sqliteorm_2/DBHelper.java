@@ -115,7 +115,7 @@ public class DBHelper extends OrmLiteSqliteOpenHelper {
             // 2 데이터 검색하기 , List형태로 읽어온다 따라서 리턴타입도 List<Memo>
             // TODO  특수문자를 줘서 SQLite 가 +word+를 번역하게 하는 방법알아보기
             // 아래식 때문에 쿼리를 알면 편하게 식을 사용할 수 있다 , Orm tool에 Raw쿼리를 날리는것 , 쿼리를 마음대로 만들어서 검색조건을 만들어서 쓸 수 있다
-            String query = "select * from memo where content like '%"+word+"%'";
+            String query = "select * from memo where content like '%" + word + "%'";
             // queryRaw 를 자세히 보면 GenericRawResults 형태로 되어있는걸 알 수 있다
             GenericRawResults<Memo> temps = dao.queryRaw(query, dao.getRawRowMapper());
             // 제너릭을 달아줌으로써 Memo 컬랙션으로 리턴이 된다
@@ -128,12 +128,42 @@ public class DBHelper extends OrmLiteSqliteOpenHelper {
     }
 
     // Update
-    public void update() {
-
+    public void update(Memo memo) {
+        try {
+            // 1. 테이블에 연결
+            Dao<Memo, Integer> dao = getDao(Memo.class);
+            // 2. 데이터를 수정
+            dao.update(memo);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
-    // Delete
-    public void delete() {
-
+    // Delete Object
+    public void delete(Memo memo) {
+        try {
+            // 1. 테이블에 연결
+            Dao<Memo, Integer> dao = getDao(Memo.class);
+            // 2. 데이터를 삭제
+            dao.delete(memo);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
+
+    // Delete By Id   @Overloading
+    public void delete(int id) {
+        try {
+            // 1. 테이블에 연결
+            Dao<Memo, Integer> dao = getDao(Memo.class);
+            // 2. 데이터를 삭제
+            dao.deleteById(id);
+            // * 참고 : 아이디로 삭제
+            // 이때는 인자를 Memo memo로 받는게 아니라 int 로 받아야한다 . 오버로드를 한다
+            // dao.deleteById(3);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

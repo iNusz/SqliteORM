@@ -2,9 +2,6 @@ package com.seunghoshin.android.sqliteorm_2;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
-
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -35,28 +32,45 @@ public class MainActivity extends AppCompatActivity {
 //        Log.i("Memo",one.getId()+"  : title"+one.getTitle()+" , content = "+one.getContent());
 //        }
 
+
+
+
         // 4. 데이터 검색 하기
         // 기본 데이터 넣기
-
 
 //        Memo memo = new Memo();
 //        memo.setTitle("제목");
 //        memo.setContent("내용");
 //        helper.create(memo);
+//
+//        // 생성자를 만들면 위의 코드가 필요가 없게되는데 다음과같이 변한다
+//        helper.create(new Memo("제목1","내용1"));
+//        helper.create(new Memo("제목2","내용2"));
+//        helper.create(new Memo("제목3","내용3"));
+//        helper.create(new Memo("제목4","내용4"));
+//
+//        // 검색하기2
+//        List<Memo> datas = helper.search("내용3");
+//        for(Memo one : datas) {
+//            Log.i("Memo", one.getId() + " : title=" + one.getTitle() + ", content=" + one.getContent());
+//        }
 
-        // 생성자를 만들면 위의 코드가 필요가 없게되는데 다음과같이 변한다
-        helper.create(new Memo("제목1","내용1"));
-        helper.create(new Memo("제목2","내용2"));
-        helper.create(new Memo("제목3","내용3"));
-        helper.create(new Memo("제목4","내용4"));
 
 
 
-        // 검색하기2
-        List<Memo> datas = helper.search("내용3");
-        for(Memo one : datas) {
-            Log.i("Memo", one.getId() + " : title=" + one.getTitle() + ", content=" + one.getContent());
-        }
+
+        // 지금 id값이 private로 잠겨있는데 이걸 해결하는 방법은 helper에서 데이터베이스 내용을 가져와서 거기에 수정된 내용만 반영하게끔 쓰면 된다
+        // 하지만 activity 다를경우 public으로 다시 풀어줘야지 쓸 수 있다 . 객체로 불러오는 방법도 있다
+        // 5. 수정하기
+//        Memo memo = helper.read(3);
+//        memo.setContent("내용을 수정합니다 ! ");
+//        helper.update(memo);
+//        Log.i("memo", memo.getId()+" ==update id ===" + memo.getTitle() + ", content = " + memo.getContent());
+
+
+        // 6. 삭제하기
+        helper.delete(5);
+
 
     }
 }

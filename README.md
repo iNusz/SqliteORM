@@ -328,3 +328,83 @@ public List<Memo> search(String word) {
         return datas;
     }
 ```
+
+
+
+
+#### update
+
+
+데이터 수정하기
+
+
+```java
+public void update(Memo memo) {
+        try {
+            // 1. 테이블에 연결
+            Dao<Memo, Integer> dao = getDao(Memo.class);
+            // 2. 데이터를 수정
+            dao.update(memo);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+```
+
+
+
+
+#### delete
+
+
+데이터 삭제하기
+
+
+- Delete Object
+
+
+
+
+```java
+public void delete(Memo memo) {
+        try {
+            // 1. 테이블에 연결
+            Dao<Memo, Integer> dao = getDao(Memo.class);
+            // 2. 데이터를 삭제
+            dao.delete(memo);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+```
+
+
+
+- Delete By Id (@Overloading)
+
+
+
+```java
+public void delete(int id) {
+    try {
+        // 1. 테이블에 연결
+        Dao<Memo, Integer> dao = getDao(Memo.class);
+        // 2. 데이터를 삭제
+        dao.deleteById(id);
+        // * 참고 : 아이디로 삭제
+        // 이때는 인자를 Memo memo로 받는게 아니라 int 로 받아야한다 . 오버로드를 한다
+        // dao.deleteById(3);
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+}
+```
+
+
+
+
+## Android Emulator
+
+아래 사진은 하나읽어오기 , 전부 읽어오기 , 찾기 , 수정하기 입니다
+
+![DBimage_1.jpg]()
