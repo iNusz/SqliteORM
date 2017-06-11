@@ -3,6 +3,7 @@ package com.seunghoshin.android.sqliteorm_2;
 import android.content.Context;
 
 import com.j256.ormlite.dao.Dao;
+import com.j256.ormlite.dao.GenericRawResults;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -75,19 +76,19 @@ public class BbsDao {
     }
 
 
-    /// todo 데이터 검색하기 질문하기
     // 데이터 검색하기
-//    public List<Bbs> search(){
-//        List<Bbs> datas = null;
-//        try {
-//            String query = "select * from memo where content like '%" + word + "%'";
-//            datas = dao.queryRaw(query, dao.getRawRowMapper());
-//            GenericRawResults<Memo> datas = dao.queryRaw(query, dao.getRawRowMapper());
-//        }catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//        return datas;
-//    }
+    public List<Bbs> search(String word) {
+        List<Bbs> datas = null;
+        try {
+            String query = "select * from memo where content like '%" + word + "%'";
+            GenericRawResults<Bbs> temps = dao.queryRaw(query, dao.getRawRowMapper());
+            datas = temps.getResults();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return datas;
+    }
 
     // 수정
     public void update(Bbs bbs) {

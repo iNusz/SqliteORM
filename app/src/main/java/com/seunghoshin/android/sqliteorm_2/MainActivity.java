@@ -13,6 +13,7 @@ public class MainActivity extends AppCompatActivity {
         // 데이터 베이스 사용
         DBHelper helper = DBHelper.getInstance(this);
         BbsDao bbsdao = BbsDao.getInstance(this);
+        MemoDao memodao = MemoDao.getInstance(this);
         // 1. 데이터 입력
 //        for (int i = 0; i < 10; i++) {
 //            Memo memo = new Memo();
@@ -70,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         // 6. 삭제하기
-        helper.delete(5);
+        memodao.delete(5);
 
 
         // todo BbsDao의 접근제한자를 private으로 만들고 사용해 보자
