@@ -18,12 +18,34 @@ import java.util.List;
 
 public class DBHelper extends OrmLiteSqliteOpenHelper {
 
+    // todo 질문하기 VERSION = 숫자 변동 값
     // 내안에다가 정의를 한다
     public static final String DATABASE_NAME = "database.db";
-    public static final int DATABASE_VERSION = 1;
+    public static final int DATABASE_VERSION = 2;
+
+    // 저장소를 static으로 DBHelper내부에 만들어 준다
+    private static DBHelper instance = null;
+
+
+
+
+    // Todo 싱글톤으로 구성해보자
+    // DBHelper 를 메모리에 하나만 있게 해서 효율을 높이자 ,
+    // DBHelper를 private로 바꾸면서 다른곳에서는 get 할수 있도록 getter을 만들어준다
+    // 반환값은 해당값을 DBHelper로 넘겨줘야한다 , 우선은 void로 다 작성한뒤 고친다
+    // 또 이 함수는 static이 되어야 하는데 그래야지 BbsDao에서 불러올수 있다
+    public static DBHelper getInstance(Context context){
+
+        // singleton pattern 이다
+        // getInstance를 호출했는데 new가 계속 호출되기 떄문에 instance가 있으면 생성이 안되게 if문을 걸어준다
+        if(instance == null) {
+            instance = new DBHelper(context);
+        }
+        return instance;
+    }
 
     // 최초 호출될때 database.db 파일을 /data/data/패키지명/database/디렉토리 ( database.db ) 아래에 파일을 생성하준다
-    public DBHelper(Context context) {
+    private DBHelper(Context context) {
         // super은 바꿀수 없다
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
@@ -36,7 +58,7 @@ public class DBHelper extends OrmLiteSqliteOpenHelper {
             // 최초 생성 테이블
             TableUtils.createTable(connectionSource, Memo.class);
             // 업그레이드 테이블
-//            TableUtils.createTable(connectionSource, Bbs.class);
+            TableUtils.createTable(connectionSource, Bbs.class);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -53,7 +75,11 @@ public class DBHelper extends OrmLiteSqliteOpenHelper {
         // 4. 임시 테이블 삭제
 
         // 업그레읻으 테이블
-//            TableUtils.createTable(connectionSource, Bbs.class);
+        try {
+            TableUtils.createTable(connectionSource, Bbs.class);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     // DBHelper을 통해서 database를 엑세스하기위해 4개의 메소드를 만든다  ( C R U D )

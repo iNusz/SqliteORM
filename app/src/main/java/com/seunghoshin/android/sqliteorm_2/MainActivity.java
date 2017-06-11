@@ -11,7 +11,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         // 데이터 베이스 사용
-        DBHelper helper = new DBHelper(this);
+        DBHelper helper = DBHelper.getInstance(this);
+        BbsDao bbsdao = BbsDao.getInstance(this);
         // 1. 데이터 입력
 //        for (int i = 0; i < 10; i++) {
 //            Memo memo = new Memo();
@@ -72,5 +73,13 @@ public class MainActivity extends AppCompatActivity {
         helper.delete(5);
 
 
+        // todo BbsDao의 접근제한자를 private으로 만들고 사용해 보자
+        // 이렇게 만들면 Helper을 직접부르는게 아니라 Dao라는 매개를해주는게 있다 , 테이블이 여러개더라도 엑세스하는 Dao는 해당 Dao밖에 없다
+
+
+//        BbsDao dao = new BbsDao(this);
+//        dao.create(new Bbs());
+
+        bbsdao.delete(5);
     }
 }
