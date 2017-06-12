@@ -95,7 +95,7 @@ public class MemoDao {
             // 1. 테이블에 연결
 //            Dao<Memo, Integer> dao = getDao(Memo.class);
             // 2 데이터 검색하기 , List형태로 읽어온다 따라서 리턴타입도 List<Memo>
-            // TODO  특수문자를 줘서 SQLite 가 +word+를 번역하게 하는 방법알아보기
+            // TODO  특수문자를 줘서 SQLite 가 +word+를 번역하게 하는 방법알아보기 prepared statement
             // 아래식 때문에 쿼리를 알면 편하게 식을 사용할 수 있다 , Orm tool에 Raw쿼리를 날리는것 , 쿼리를 마음대로 만들어서 검색조건을 만들어서 쓸 수 있다
             String query = "select * from memo where content like '%" + word + "%'";
             // queryRaw 를 자세히 보면 GenericRawResults 형태로 되어있는걸 알 수 있다

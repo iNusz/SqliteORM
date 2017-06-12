@@ -11,7 +11,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         // 데이터 베이스 사용
-        DBHelper helper = DBHelper.getInstance(this);
+
         BbsDao bbsdao = BbsDao.getInstance(this);
         MemoDao memodao = MemoDao.getInstance(this);
         // 1. 데이터 입력
